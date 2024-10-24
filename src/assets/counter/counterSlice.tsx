@@ -1,5 +1,6 @@
 
 import { createSlice } from "@reduxjs/toolkit"
+import { AppDispatch } from "../../store";
 
 
 const initialState={
@@ -18,9 +19,15 @@ export const counterSlice = createSlice({
         },
         incrementByAmount:(state,action)=>{
             state.value += action.payload
-        }
+        },
+        
     }
 })
 
+export const incrementAsync = (amount:Number)=>(dispatch:AppDispatch)=>{
+    setTimeout(()=>{
+        dispatch(incrementByAmount(amount))
+    },1000)
+}
 export const {increment,decrement,incrementByAmount} = counterSlice.actions
 export default counterSlice.reducer
